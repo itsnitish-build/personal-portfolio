@@ -36,17 +36,42 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
+    const accessKey = process.env.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY;
+    if (!accessKey) {
+      setStatus("error");
+      setStatusMessage(
+        "The contact form isn't set up to deliver email yet. Please email me directly."
+      );
+      return;
+    }
+
     setStatus("loading");
     try {
-      const res = await fetch("/api/contact", {
+      const res = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: accessKey,
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: `[Portfolio] ${formData.subject.trim()}`,
+          message: formData.message.trim(),
+          from_name: formData.name.trim(),
+          replyto: formData.email.trim(),
+          botcheck: "",
+        }),
       });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error);
+      const data: { success?: boolean; message?: string } = await res.json();
+      if (!res.ok || !data.success) {
+        throw new Error(
+          data.message || "Could not send the message. Please email me directly."
+        );
+      }
       setStatus("success");
-      setStatusMessage(data.message);
+      setStatusMessage("Message sent. I'll get back to you soon.");
       setFormData({ name: "", email: "", subject: "", message: "" });
     } catch (err) {
       setStatus("error");

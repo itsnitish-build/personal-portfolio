@@ -11,7 +11,7 @@ export const SITE_CONFIG = {
     "Software Engineer building production React Native mobile apps and modern web experiences. Shipped Ulikme, BookYourHolistic, and contributed to Kundli Pro.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://nitish.dev",
   ogImage: "/images/og-image.svg",
-  resumeUrl: "https://drive.google.com/file/d/1CHTlYB8OOnFtb8w0kStM49DGPHK4gq5y/view?usp=drivesdk",
+  resumeUrl: "/resume.pdf",
   role: "Full Stack Mobile Developer",
   location: "Delhi, India",
   status: "Open to new roles",
@@ -124,7 +124,7 @@ export const MARQUEE_TECH = [
 ];
 
 export const CONTACT_INFO: ContactInfo = {
-  email: "work.nitish19@gmail.com",
+  email: "itsnitish.dev@gmail.com",
   phone: "+91 87097 95268",
   location: "Delhi, India",
 };
@@ -132,15 +132,15 @@ export const CONTACT_INFO: ContactInfo = {
 export const SOCIAL_LINKS = [
   {
     name: "Email",
-    href: "mailto:work.nitish19@gmail.com",
+    href: "mailto:itsnitish.dev@gmail.com",
     icon: "mail",
-    value: "work.nitish19@gmail.com",
+    value: "itsnitish.dev@gmail.com",
   },
   {
     name: "GitHub",
-    href: "https://github.com/nitish4git",
+    href: "https://github.com/itsnitish-build",
     icon: "github",
-    value: "github.com/nitish4git",
+    value: "github.com/itsnitish-build",
   },
   {
     name: "LinkedIn",
